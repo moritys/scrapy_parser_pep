@@ -1,24 +1,33 @@
-from collections import defaultdict
+import csv
+import datetime as dt
 
-from pep_parse.outputs import file_output
+from pep_parse.constants import BASE_DIR, DATETIME_FORMAT
 
 
-class SummaryPipeline:
+class PepParsePipeline:
 
     def open_spider(self, spider):
-        pass
+        self.status_summary = {}
 
     def process_item(self, item, spider):
-        count_statuses_dict = defaultdict(int)
-        page_status = item['status']
-        count_statuses_dict[page_status] += 1
-        summary_table = (
-            ('Статус', 'Количество'),
-            *count_statuses_dict.items(),
-            ('Total', sum(count_statuses_dict.values()))
-        )
-        print(summary_table)
+        status = item['status']
+        self.status_summary[status] = self.status_summary.get(status, 0) + 1
         return item
 
     def close_spider(self, spider):
-        pass
+        summary_table = (
+            ('Статус', 'Количество'),
+            *self.status_summary.items(),
+            ('Total', sum(self.status_summary.values()))
+        )
+        results_dir = BASE_DIR / 'results'
+        results_dir.mkdir(exist_ok=True)
+
+        now = dt.datetime.now()
+        now_formatted = now.strftime(DATETIME_FORMAT)
+        file_name = f'status_summary_{now_formatted}.csv'
+        file_path = results_dir / file_name
+
+        with open(file_path, 'w', encoding='utf-8') as f:
+            writer = csv.writer(f, dialect='unix')
+            writer.writerows(summary_table)

@@ -12,7 +12,7 @@ NEWSPIDER_MODULE = 'pep_parse.spiders'
 
 ROBOTSTXT_OBEY = True
 
-PEP_FILE = './results/pep_%(time)s.csv'
+PEP_FILE = 'results/pep_%(time)s.csv'
 FEEDS = {
     PEP_FILE: {
         'format': 'csv',
@@ -22,5 +22,5 @@ FEEDS = {
 }
 
 ITEM_PIPELINES = {
-    'pep_parse.pipelines.SummaryPipeline': 300,
+    'pep_parse.pipelines.PepParsePipeline': 300,
 }
