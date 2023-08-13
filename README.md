@@ -23,20 +23,28 @@
 
 1. Клонируйте репозиторий с GitHub:
 
-`git clone https://github.com/moritys/scrapy_parser_pep.git`
+```
+git clone https://github.com/moritys/scrapy_parser_pep.git
+```
 
-1. Создайте и активируйте виртуальное окружение:
+2. Создайте и активируйте виртуальное окружение:
 
-`python -m venv venv && source venv/Scripts/activate`
+```
+python -m venv venv && source venv/Scripts/activate
+```
 
-1. Установите в виртуальное окружение все необходимые зависимости из файла  **requirements.txt**:
+3. Установите в виртуальное окружение все необходимые зависимости из файла  **requirements.txt**:
 
-`python -m pip install --upgrade pip && pip install -r requirements.txt`
+```
+python -m pip install --upgrade pip && pip install -r requirements.txt
+```
 
-1. Запустите приложение:
+4. Запустите приложение:
 
-`scrapy crawl pep`
+```
+scrapy crawl pep
+```
 
 ### Автор
 
-[Masha](https://github.com/moritys) 🐌
+🌸 [Masha](https://github.com/moritys) 🌸
