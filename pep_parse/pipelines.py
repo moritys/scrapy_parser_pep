@@ -1,17 +1,19 @@
 import csv
 import datetime as dt
 
+from collections import defaultdict
+
 from pep_parse.constants import BASE_DIR, DATETIME_FORMAT
 
 
 class PepParsePipeline:
 
     def open_spider(self, spider):
-        self.status_summary = {}
+        self.status_summary = defaultdict(int)
 
     def process_item(self, item, spider):
         status = item['status']
-        self.status_summary[status] = self.status_summary.get(status, 0) + 1
+        self.status_summary[status] += 1
         return item
 
     def close_spider(self, spider):
